@@ -90,26 +90,25 @@ listaMenu.forEach((item) => {
     document.addEventListener("DOMContentLoaded", function() {
         const trendsContainer = document.getElementById("tech-trends");
     
-        const url = "http://api.open-notify.org/iss-now.json"; // API que devuelve la ubicación de la ISS
+        const url = "https://api.adviceslip.com/advice";
     
         fetch(url)
-        .then(response => response.json())
-        .then(data => {
-            const { latitude, longitude } = data.iss_position;
-            
-            let html = `
-                <h2>Ubicación de la Estación Espacial Internacional (ISS)</h2>
-                <p>La ISS se encuentra actualmente en:</p>
-                <p><strong>Latitud:</strong> ${latitude}</p>
-                <p><strong>Longitud:</strong> ${longitude}</p>
-            `;
-            
-            trendsContainer.innerHTML = html;
-        })
-        .catch(error => {
-            console.error("Error al cargar la información de la ISS.", error);
-            trendsContainer.innerHTML = "<p>Error al cargar la información.</p>";
-        });
+            .then(response => response.json())
+            .then(data => {
+                const advice = data.slip.advice;
+    
+                let html = `
+                    <h2>Un consejo para ti:</h2>
+                    <p>"${advice}"</p>
+                `;
+    
+                trendsContainer.innerHTML = html;
+            })
+            .catch(error => {
+                console.error("Error al cargar el consejo.", error);
+                trendsContainer.innerHTML = "<p>Error al cargar el consejo.</p>";
+            });
+    });
         
 
 // Si la visita ya está registrada en la sesión, no incrementar el contador.
