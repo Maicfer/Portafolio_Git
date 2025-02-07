@@ -1,25 +1,20 @@
-// Menu lateral
-var menu_visible = false;
-let menu = document.getElementById("nav");
+// Función para manejar el menú lateral
+let menu_visible = false;
+const menu = document.getElementById("nav");
 
 function mostrarOcultarMenu() {
-    if (!menu_visible) {
-        menu.style.display = "block";
-        menu_visible = true;
-    } else {
-        menu.style.display = "none";
-        menu_visible = false;
-    }
+    menu.style.display = menu_visible ? "none" : "block";
+    menu_visible = !menu_visible;
 }
 
 // Ocultar menú al seleccionar una opción
-let links = document.querySelectorAll("nav a");
-for (let x = 0; x < links.length; x++) {
-    links[x].onclick = function () {
+const links = document.querySelectorAll("nav a");
+links.forEach(link => {
+    link.onclick = () => {
         menu.style.display = "none";
         menu_visible = false;
-    }
-}
+    };
+});
 
 // Crear barras de habilidades
 function crearBarra(id_barra) {
@@ -30,25 +25,25 @@ function crearBarra(id_barra) {
     }
 }
 
-// Seleccionar todas las barras
-let habilidades = ["html", "javascript", "wordpress", "photoshop", "php", "ilustrator"];
+// Habilidades y contadores
+const habilidades = ["html", "javascript", "wordpress", "photoshop", "php", "ilustrator"];
 let contadores = [-1, -1, -1, -1, -1, -1];
 let entro = false;
 
 habilidades.forEach((habilidad, index) => {
-    let elemento = document.getElementById(habilidad);
+    const elemento = document.getElementById(habilidad);
     crearBarra(elemento);
 });
 
 // Efecto de animación de habilidades
 function efectoHabilidades() {
-    let habilidadesElement = document.getElementById("habilidades");
-    let distancia_skills = window.innerHeight - habilidadesElement.getBoundingClientRect().top;
+    const habilidadesElement = document.getElementById("habilidades");
+    const distancia_skills = window.innerHeight - habilidadesElement.getBoundingClientRect().top;
     if (distancia_skills >= 300 && !entro) {
         entro = true;
         habilidades.forEach((habilidad, index) => {
             let cantidad = index % 2 === 0 ? 16 : 11;
-            let elemento = document.getElementById(habilidad);
+            const elemento = document.getElementById(habilidad);
             const interval = setInterval(() => {
                 pintarBarra(elemento, cantidad, index, interval);
             }, 100);
@@ -59,9 +54,9 @@ function efectoHabilidades() {
 // Pintar barra
 function pintarBarra(id_barra, cantidad, indice, interval) {
     contadores[indice]++;
-    let x = contadores[indice];
+    const x = contadores[indice];
     if (x < cantidad) {
-        let elementos = id_barra.getElementsByClassName("e");
+        const elementos = id_barra.getElementsByClassName("e");
         elementos[x].style.backgroundColor = "#940253";
     } else {
         clearInterval(interval);
@@ -73,11 +68,7 @@ window.onscroll = function () {
     efectoHabilidades();
 };
 
-// Obtener el botón y escuchar el evento de clic
-const btnModoOscuro = document.getElementById('btn-modo-oscuro');
-
 // Cambio de color al pasar el mouse por el menú
-let listaMenu = document.querySelectorAll("nav a");
 listaMenu.forEach((item) => {
     item.addEventListener("mouseover", () => {
         item.style.color = "#ffcc00";
@@ -132,19 +123,20 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("visit-counter").textContent = `Visitas: ${visitCountDisplay}`;
 });
 
-// Formulario de contacto
-document.getElementById("contact-form").addEventListener("submit", function(event) {
-    event.preventDefault();
 
-    let name = document.getElementById("name").value;
-    let email = document.getElementById("email").value;
-    let message = document.getElementById("message").value;
+// Manejar el envío del formulario
+document.getElementById("contact-form").addEventListener("submit", function(event) {
+    event.preventDefault(); // Evita que la página se recargue al enviar el formulario
+
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const message = document.getElementById("message").value;
 
     console.log("Nombre:", name);
     console.log("Correo Electrónico:", email);
     console.log("Mensaje:", message);
 
-    alert("Gracias por tu mensaje, " + name + ". Pronto nos pondremos en contacto contigo.");
+    alert(`Gracias por tu mensaje, ${name}. Pronto nos pondremos en contacto contigo.`);
 });
 
 
