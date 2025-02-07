@@ -24,10 +24,10 @@ html{
 .nav a {
     color: #620707; 
     transition: color 0.3s ease; 
-  } 
-  .nav a:hover {
+} 
+.nav a:hover {
     color: #029418f9; 
-  }
+}
 .inicio .contenido-seccion{
     max-width: 1000px;
     margin: auto;
@@ -176,9 +176,12 @@ html{
 
 /* SECCION LO QUE OFREZCO */
 .loqueofrezco{
-    background-color: #e6e6e6;
+    background-image: url(img/descarga.jpeg);
     padding: 140px 0 100px 0;
     text-align: center;
+    background-size: cover; /* Ajusta la imagen al tamaño del contenedor */
+    background-position: center; /* Centra la imagen */
+    color: #fff; /* Cambia el color del texto a blanco para que se vea bien con la imagen de fondo */
 }
 .loqueofrezco .contenido-seccion{
     max-width: 1000px;
@@ -651,10 +654,34 @@ body {
     font-size: 14px;
     color: #888;
     padding: 10px;
+}
+
+.footer p {
+    margin-bottom: 20px; /* Ajusta este valor para controlar el espaciado */
+}
+
+/* Estilo para descargar cv" */
+.descarga-cv {
+    text-align: center; /* Centrar el botón/enlace */
+    margin-top: 20px; /* Espacio superior */
   }
   
-  .footer p {
-    margin-bottom: 20px; /* Ajusta este valor para controlar el espaciado */
+  .descarga-cv a {
+    display: inline-block; /* Convertir el enlace en bloque para estilos */
+    padding: 10px 20px; /* Relleno interior */
+    background-color: #025794f9; /* Color de fondo */
+    color: #fff; /* Color de texto */
+    text-decoration: none; /* Quitar subrayado del enlace */
+    border-radius: 5px; /* Bordes redondeados */
+    transition: background-color 0.3s ease; /* Transición suave */
+  }
+  
+  .descarga-cv a:hover {
+    background-color: #029418f9; /* Color de fondo al pasar el cursor */
+  }
+  
+  .descarga-cv i {
+    margin-right: 5px; /* Espacio entre icono y texto */
   }
 
 }
