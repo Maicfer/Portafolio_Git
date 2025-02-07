@@ -78,12 +78,10 @@ listaMenu.forEach((item) => {
     });
 });
 
-// API de la ISS
 document.addEventListener("DOMContentLoaded", function() {
     const trendsContainer = document.getElementById("tech-trends");
 
-    // Usar CORS Anywhere para evitar problemas con CORS
-    const url = "https://cors-anywhere.herokuapp.com/http://api.open-notify.org/iss-now.json"; // API que devuelve la ubicación de la ISS
+    const url = "http://api.open-notify.org/iss-now.json"; // API que devuelve la ubicación de la ISS
 
     fetch(url)
     .then(response => response.json())
@@ -103,26 +101,48 @@ document.addEventListener("DOMContentLoaded", function() {
         console.error("Error al cargar la información de la ISS.", error);
         trendsContainer.innerHTML = "<p>Error al cargar la información.</p>";
     });
+    
 
-    // Contador de visitas
-    if (!sessionStorage.getItem("visited")) {
-        let visitCount = localStorage.getItem("visitCount");
+// Si la visita ya está registrada en la sesión, no incrementar el contador.
+if (!sessionStorage.getItem("visited")) {
+// Si es la primera vez que se visita, incrementamos el contador en localStorage.
+let visitCount = localStorage.getItem("visitCount");
 
-        if (!visitCount) {
-            visitCount = 1; // Primera visita
-        } else {
-            visitCount = parseInt(visitCount) + 1; // Incrementar el contador
-        }
+if (!visitCount) {
+    visitCount = 1; // Primera visita
+} else {
+    visitCount = parseInt(visitCount) + 1; // Incrementar el contador
+}
 
-        localStorage.setItem("visitCount", visitCount); // Guardar el contador actualizado
+localStorage.setItem("visitCount", visitCount); // Guardar el contador actualizado
 
-        sessionStorage.setItem("visited", "true");
-    }
+// Marcar que esta sesión ya ha visitado la página
+sessionStorage.setItem("visited", "true");
+}
 
-    let visitCountDisplay = localStorage.getItem("visitCount");
-    document.getElementById("visit-counter").textContent = `Visitas: ${visitCountDisplay}`;
+// Mostrar el contador en el div
+let visitCountDisplay = localStorage.getItem("visitCount");
+document.getElementById("visit-counter").textContent = `Visitas: ${visitCountDisplay}`;
 });
 
+document.getElementById("contact-form").addEventListener("submit", function(event) {
+event.preventDefault(); // Evita que la página se recargue al enviar el formulario
+
+// Capturar los datos del formulario
+let name = document.getElementById("name").value;
+let email = document.getElementById("email").value;
+let message = document.getElementById("message").value;
+
+// Mostrar los datos en la consola (puedes almacenarlos o enviarlos a un servidor)
+console.log("Nombre:", name);
+console.log("Correo Electrónico:", email);
+console.log("Mensaje:", message);
+
+// Mostrar un mensaje de confirmación
+alert("Gracias por tu mensaje, " + name + ". Pronto nos pondremos en contacto contigo.");
+
+
+});
 
 // Manejar el envío del formulario
 document.getElementById("contact-form").addEventListener("submit", function(event) {
